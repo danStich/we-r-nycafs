@@ -4,18 +4,18 @@
 ## **Workshop modules**
 Please use the links below to access materials (code, video, feeds) from R workshops. For new users, it is best to start with the introduction to R programming and then move on to more advanced topics. Note that not all workshops are available yet.
 
-<h2 id = "multi"><b>Available workshop content</b></h2>
+<h3 id = "multi"><b>Available workshop content</b></h3>
 <a href="./intro-home.html">Introduction to R and RStudio</a>: an introductory stroll through key concepts and syntax in R. This session will cover the basics needed in others listed below.</br>
 
 
-<h2 id = "multi"><b>Coming soon</b></h2>
+<h3 id = "multi"><b>Coming soon</b></h3>
 <!-- <a href="./fishStats.html"><b>Introduction to fisheries statistics in R</b></a>: -->
-<b>Introduction to fisheries statistics in R</b>: an introduction to methods and tools available for common fisheries analyses in R, including length-frequency histograms, length-weight regression, growth curves, and proportional size distribution (PSD). Methods are demonstrated using base R functionality in addition to functions available through the `FSA` package for R (<a href="https://github.com/droglenc/FSA">Ogle et al. 2020</a>, <a>https://derekogle.com/fishR</a>). 
+<b>Introduction to fisheries statistics in R</b>: an introduction to methods and tools available for common fisheries analyses in R, including length-frequency histograms, length-weight regression, growth curves, and proportional size distribution (PSD). Methods are demonstrated using base R functionality in addition to functions available through the `FSA` package for R (<a href="https://github.com/droglenc/FSA">Ogle et al. 2020</a>). 
 
 <b>Introduction to spatial data in R</b>: a (really basic) introduction to working with and plotting data commonly used in geographic information systems (GIS).
 
-### **References**
-Ogle, D.H., P. Wheeler, and A. Dinno. 2020. FSA: Fisheries Stock Analysis. R package version 0.8.30, https://github.com/droglenc/FSA.
+<h2 id = "multi"> **References** </h2>
+Ogle, D.H., P. Wheeler, and A. Dinno. 2020. FSA: Fisheries Stock Analysis. R package version 0.8.30. Website:  [https://derekogle.com/fishR](https://derekogle.com/fishR)
 
 <br> 
  
