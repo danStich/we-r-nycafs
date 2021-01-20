@@ -5,7 +5,7 @@ title: "Contact"
 ```{r, child="_styles.Rmd"}
 ```
 
-<img src="../../images/StichPicture.png" alt="">
+<img src="./images/StichPicture.png" alt="">
 <br>
 
  **Dan Stich** <br>

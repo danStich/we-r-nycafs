@@ -11,8 +11,8 @@ navbar:
       href: content.html
     - text: "Additional Resources"
       href: resources.html
-    - text: "Instructors"
-      href: instructors.html      
+    - text: "Contact"
+      href: contact.html      
   right:    
     - icon: fa-youtube
       href: https://www.youtube.com/channel/UCB1l-SSnpD7ndeNe7Fbg4_g   
