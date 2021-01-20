@@ -11,6 +11,6 @@ The Introductory module is provided in two smaller modules to help you take thin
 
 [Part I](Introductory.html) The first half of the introductory workshop will focus on how to use RStudio and write some basic code while covering necessities like syntax, objects, packages, and reading external data.
 
-[Part II](Introductory-II.html) The second half of the introductory workshop will focus on how to create data some basic but powerful data summaries and some basic data visualization with the packages from the `tidyverse`.
+[Part II](Introductory-II.html) The second half of the introductory workshop will focus on how to create some basic but powerful data summaries and some basic data visualization with the packages from the `tidyverse`.
 
 <br>
