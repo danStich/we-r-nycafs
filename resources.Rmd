@@ -6,7 +6,7 @@
 title: "Additional resources"
 ---
 
-At every workshop or during every semester, folks ask about about additional resources so they can keep learning about the unholy power of R. In response to those requests, we provide a brief through the window into the world of all that is available. One of the great things about using a free software program that is super popular is that tons of people have put together how-tos, blogs, forums (Fora? Sounds like flora), websites, and free ebooks. Truthfully, there are more resources out there than can reasonably be accommodated here, but some of the links below contain links to *even more* resources. It's resources all the way down.
+At every workshop or during every semester, folks ask about about additional resources so they can keep learning about the unholy power of R. In response to those requests, we provide a brief glimpse through the window into the world of all that is available. One of the great things about using a free software program that is super popular is that tons of people have put together how-tos, blogs, forums (Fora? Sounds like flora), websites, and free ebooks. Truthfully, there are more resources out there than can reasonably be accommodated here, but some of the links below contain links to *even more* resources. It's resources all the way down.
 
 Here are a few of our favorites:
 
