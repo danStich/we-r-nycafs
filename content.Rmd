@@ -10,7 +10,7 @@ Please use the links below to access materials (code, video, feeds) from R works
 
 <h2 id = "multi"><b>Coming soon</b></h2>
 <!-- <a href="./fishStats.html"><b>Introduction to fisheries statistics in R</b></a>: -->
-<b>Introduction to fisheries statistics in R: an introduction to methods and tools available for common fisheries analyses in R, including length-frequency histograms, length-weight regression, growth curves, and proportional size distribution (PSD). Methods are demonstrated using base R functionality in addition to functions available through the `FSA` package for R (<a href="https://github.com/droglenc/FSA">Ogle et al. 2020</a>, <a>https://derekogle.com/fishR</a>). 
+<b>Introduction to fisheries statistics in R</b>: an introduction to methods and tools available for common fisheries analyses in R, including length-frequency histograms, length-weight regression, growth curves, and proportional size distribution (PSD). Methods are demonstrated using base R functionality in addition to functions available through the `FSA` package for R (<a href="https://github.com/droglenc/FSA">Ogle et al. 2020</a>, <a>https://derekogle.com/fishR</a>). 
 
 <b>Introduction to spatial data in R</b>: a (really basic) introduction to working with and plotting data commonly used in geographic information systems (GIS).
 
