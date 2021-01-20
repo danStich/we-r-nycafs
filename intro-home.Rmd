@@ -1,0 +1,16 @@
+```{r, child="_styles.Rmd"}
+```
+
+<h1 id="multi">Introduction to programming in R</h1>
+
+<img src="./images/roh.png" alt="">
+
+Welcome to programming in R. The modules on this page will serve as tutorials to help you get acquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way. We will cover many of the concepts in the tutorials below during live session, but we will not cover all of the examples here. Instead, these examples are provided to help you practice before or after the live workshops.
+
+The Introductory module is provided in two smaller modules to help you take things one step at a time:
+
+[Part I](Introductory.html) The first half of the introductory workshop will focus on how to use RStudio and write some basic code while covering necessities like syntax, objects, packages, and reading external data.
+
+[Part II](Introductory-II.html) The second half of the introductory workshop will focus on how to create data some basic but powerful data summaries and some basic data visualization with the packages from the `tidyverse`.
+
+<br>

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introductory-II.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">We R NYCAFS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="software.html">Before the workshops</a>
+</li>
+<li>
+  <a href="content.html">Workshop modules</a>
+</li>
+<li>
+  <a href="resources.html">Additional Resources</a>
+</li>
+<li>
+  <a href="instructors.html">Instructors</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.youtube.com/channel/UCB1l-SSnpD7ndeNe7Fbg4_g">
+    <span class="fa fa-youtube"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/danStich/we-r-nycafs">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<h1 id="multi">
+Data manipulation and visualization
+</h1>
+<p><img src="images/matrixSmolt.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
+<p>The objective of the second half of this module is to reinforce common tools that you learned about in the first half of the Introductory session and get you started developing skills in data manipulation and visualization. We will continue to build these skills and integrate them into statistical analyses in the <a href="afternoon.html">Intermediate R workshop</a>.</p>
+<p>By the end of this module, you should be comfortable: 1) reading data into R, 2) conducting some basic data manipulation, 3) generating new variables, and 4) creating and modifying basic plots.</p>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<h3 id="multi">
+Packages
+</h3>
+<p>We’re going to work with the <code>dplyr</code>, <code>ggplot2</code>, and <code>magrittr</code> packages for this module, so you can go ahead and put some code in your script to load them both from the library where they were installed on your computer. If you installed them with the <code>tidyverse</code>, you can go ahead and load the whole thing all at once [loves this feature].</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<h3>
+Data import
+</h3>
+<p>Read the data from <code>physical.csv</code> into R from the <code>data</code> directory in your workshop folder using the <code>read.csv()</code> function. If you saved your script in the workshop folder, then you can just run <code>dir(data/)</code> to see the file names and copy and paste from the output into your <code>read.csv()</code> function so you don’t mess up the name.</p>
+<p>The <code>header = TRUE</code> tells R that our columns have names in the first row.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/physical.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Verify that this worked by checking your <code>Environment</code> tab in your RStudio session or running <code>ls()</code> in the console:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">ls</span>()</span></code></pre></div>
+<div id="data-explanation" class="section level3">
+<h3>Data explanation</h3>
+<p>These are data collected each year from Otsego Lake by students, staff, and faculty at the SUNY Oneonta Biological Field Station in Cooperstown, NY, USA. The data set includes temperature (°C), pH, dissolved oxygen, and specific conductance measurements from a period of about 40 years. There are all kinds of cool spatial and seasonal patterns in the data that we can look at.</p>
+<p>We will use <code>do_mgl</code> for the examples that follow. This variable is a measure of the amount of dissolved oxygen available in the water at each depth on each day of the data set. Dissolved oxygen is important for supporting aerobic organisms that can’t produce their own food through photosynthesis (e.g. aquatic bugs, clams, fish). It has been measured along with other water characteristics to help monitor changes in the lake due to watershed and in-lake management as well as introduced species or climate change.</p>
+<p>One of the biggest changes to Otsego Lake in the last several decades was a reduction in the amount of dissolved oxygen in the deepest water (hypolimnion). A primary cause of this reduction in dissolved oxygen was the introduction of an invasive fish, the alewife (<em>Alosa pseudoharengus</em>). Alewife are really good at eating the microscopic animals (zooplankton) that graze on algae. When they were introduced, the alewife population increased rapidly and basically ate all of the zooplankton that eat algae. This allowed algae to grow out of control during the summer. Once the algae dies each year, it sinks to the bottom of the lake where it is decomposed by aerobic organisms that use up oxygen deep in the lake. The amount of oxygen available is fixed from about June until December each year until seasonal changes cause all of the water to mix together again. This means that the lowest oxygen levels were occurring in the deepest water around October or November each year. Oxygen levels got so low because of this that the deep, cold water needed by popular sport fishes such as lake trout (<em>Salvelinus namaycush</em>) did not have enough oxygen to support them. Therefore, the New York State Department of Environmental Conservation (NYSDEC), SUNY Oneonta Biological Field Station, Otsego Lake Association, and others began stocking walleye (<em>Sander vitreus</em>) to eliminate the alewife and reverse these changes. What a hot mess, huh?!</p>
+<p>It turns out that these folks were actually successful in eliminating the alewife. Well, sort of. It is kind of a messy story thanks to the subsequent introduction of invasive zebra mussels (<em>Dreissena polymorpha</em>) in 2008. But, hey - that’s fisheries!</p>
+<p>For this exercise, we will weed through about 30 years of data to summarize changes in dissolved oxygen in Otsego Lake during the last 30 years while all of these cool changes were happening. But, to get there we’ll need to do some data munging and some quality-control to assure that we know what we’re working with. These steps are pretty typical for most data sets you’ll run into, and are a critical part of experimental design and the statistical analyses that we’ll want to conduct later.</p>
+</div>
+<div id="first-steps-for-data" class="section level3">
+<h3>First steps for data</h3>
+<p>I constantly forget about the fancy point-and-click tools that RStudio brings to the table having learned much of my basic R syntax right before that revolution occurred. Make sure that you look at your data structure in your <code>Environment</code> tab or using the <code>str()</code> function.</p>
+<p>You can also use the built-in function <code>summary()</code> to get a closer look at your data.</p>
+<p>Once you’ve taken a look at the data, let’s check out some specifics.</p>
+<p>How many (unique) years are included in this data set? If you are stuck look back to how we did this during the first half of the Introductory session you can peek at that. Or, you could <a href="http://letmegooglethat.com/?q=how+to+find+unique+values+in+R">Google</a> it.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Insert code for this here</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># This is a reminder for me to have people</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># do this, not a leftover reminder to put code here.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Do it. I&#39;ll demonstrate, don&#39;t worry!</span></span></code></pre></div>
+<p>Next, calculate the mean dissolved oxygen <code>do_mgl</code> throughout the water column each year. You can use the approach demonstrated in the first half for this.</p>
+<p>Here is what this would look like using the <code>%&gt;%</code> (“pipe”) operator from the <code>magrittr</code> package to chain our operations together. Remember that the purpose of this is to allow us to pass the results of one function directly to another so we don’t have to create intermediate objects or use <code>$</code> notation to reference column names.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># This will do it all at once!</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the group_by function</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Group by year and pass to summarize</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl))</span></code></pre></div>
+<p>But, it can be a little confusing to get dive right in like this. If you are not yet comfortable with the <code>%&gt;%</code> operator, you could do also go step-by-step using the <code>group_by()</code> and <code>summarize()</code> functions:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tempdf &lt;-<span class="st"> </span><span class="kw">group_by</span>(otsego, year) <span class="co"># Create data frame to hold grouped data</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>ann &lt;-<span class="st"> </span><span class="kw">summarize</span>( tempdf, <span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl) ) <span class="co"># Summarize mean do_mgl by year</span></span></code></pre></div>
+<p>You’ll notice that if you try to print <code>ann</code> to the console, it does not display the whole object. If you’d like to see the whole thing, you can still use <code>View(ann)</code> to open it in the data viewer.</p>
+<p>If you don’t like the message that <code>summarize()</code> produces, you can add <code>groups = "keep"</code> to your call. Just be sure to separate it with a comma!</p>
+<p>Have a look at it….</p>
+</div>
+<div id="missing-data-and-r" class="section level3">
+<h3>Missing data and R</h3>
+<p>Uh-oh, looks like something went wrong! We have a whole bunch of <code>NA</code> values in our data!</p>
+<p>Most of the time this is not a big deal, but the default behavior for some functions, such as <code>mean()</code> and <code>sd()</code> will return <code>NA</code> if <em>any</em> of the values in a column are <code>NA</code>. This is good because it lets us know something is funky. In this case, we just have some missing measurements, so we will tell R to remove those observations when it calculates the mean (<code>avg</code>) in our call to <code>summarize()</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the group_by function</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Group by year and pass to summarize</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<p>Now, you should have a numeric value of mean <code>do_mgl</code> in Otsego Lake for each <code>year</code> in an new tibble called <code>ann</code> for which there were data!</p>
+<p>Have a look at <code>ann</code> to confirm that this is true before moving on.</p>
+<p>If you needed to, you could find out how many of these are missing by using a combination of <code>is.na</code> and <code>which</code>, replacing <code>...</code> with the name of the object you want to query (e.g., the column <code>do_mgl</code> in the dataframe <code>otsego</code>).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">which</span>(<span class="kw">is.na</span>(...))</span></code></pre></div>
+</div>
+<div id="subsetting-and-plotting" class="section level3">
+<h3>Subsetting and plotting</h3>
+<p>Now that we have a handle on what the data look like to R we can start to look at some of the trends in dissolved oxygen that I mentioned earlier.</p>
+<p>Let’s start by making a boxplot of <code>do_mgl</code> by <code>year</code> in the <code>otsego</code> data.</p>
+<p>We will use the <code>ggplot()</code> function to create an aesthetic mapping for the plot that tells R what data set to use (<code>otsego</code>), and what column names to assign to the x and y axes. In this case, I provide some separate aesthetics in the boxplot geometry (<code>geom_boxplot()</code> function) so R knows that I want to use <code>year</code> as a grouping variable instead of a numeric variable.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(otsego, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">group =</span> year))</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>You probably got a warning message from this about non-finite values. This is because the <code>otsego</code> data had <code>NA</code> values in it. This will not affect your plot except that it is ignoring <code>NA</code> values for <code>do_mgl</code>, the ramifications of which we’ve already discussed in the context of data management.</p>
+<p>More importantly, if you look at the trends in dissolved oxygen here they don’t really match the story I told you (I guess maybe if you squint). Remember that this data set currently has data from the entire water column, and we are only really interested in what happened to dissolved oxygen in the deepest part of the lake during fall, when oxygen levels fall below critical levels needed by aerobic organisms at the bottom of the lake.</p>
+<p>You could also take a look at dissolved oxygen as a function of depth to see if this makes things any clearer (we’ll use some 3-d approaches in the Intermediate session). Of course it’s still a mess, but this code should show you how easy it is to switch your geometry from a boxplot to a scatter plot!!</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(otsego, <span class="kw">aes</span>(<span class="dt">x =</span> depth, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">print</span>(sp)</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>In this case, what we really need to do is subset the data to look at just the part in which we are interested.</p>
+<p>Let’s get just those observations where <code>depth</code> is greater than 40 meters (about 120 ft) in the month of October (late autumn before mixing occurs) to see if we can make out inter-annual trends in hypolimnetic <code>do_mgl</code> a little better.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>hypo &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the subset function</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">  </span><span class="kw">subset</span>(depth <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># Select depths &gt; 40 m in October</span></span></code></pre></div>
+<p>Now, go ahead and make another quick box plot of <code>do_mgl</code> by <code>year</code> using your new dataframe. Note that this time I am not saving the original output of <code>ggplot()</code> to an object, so I don’t need to print it.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> year))</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Alright! This looks a lot more like the story I was telling you at the start of this. If only the graph did it justice…don’t worry, you’ll have to make it pretty at the end.</p>
+</div>
+<div id="creating-a-new-variable" class="section level3">
+<h3>Creating a new variable</h3>
+<p>Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let’s say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!!</p>
+<p>We’ll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the <code>hypo</code> data frame (shameful, I know).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>hypo &lt;-<span class="st"> </span>hypo <span class="op">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  </span><span class="kw">subset</span>(year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1988</span>)</span></code></pre></div>
+<p>Now that we have just the “alewife” and “post-alewife” years in our data, we can go ahead and assign each of the years to one of these two groups using a 2010 cut-off year.</p>
+<p>Create a new column in <code>hypo</code> that will hold a grouping variable for <code>alewife</code>. I initialize this by assigning it the value <strong><code>present</code></strong> for all rows. Note that I only supply a single value, but R knows to repeat this for each row in the data frame.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>hypo<span class="op">$</span>alewife &lt;-<span class="st"> &quot;present&quot;</span></span></code></pre></div>
+<p>Next, we’ll modify <code>hypo$alewife</code> to replace “present” with “absent” for all years after 2010 by treating it like an atomic vector!</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>hypo<span class="op">$</span>alewife[hypo<span class="op">$</span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2010</span>] &lt;-<span class="st"> &quot;absent&quot;</span></span></code></pre></div>
+<p>Now if we wanted to, we could calculate the mean <code>do_mgl</code> in years when <code>alewife</code> were <code>present</code> or <code>absent</code>. Go ahead and give this a try.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Insert code for this here</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># This is a reminder for me to have people</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># do this, not a leftover reminder to put code here.</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Do it. I&#39;ll demonstrate, don&#39;t worry!</span></span></code></pre></div>
+</div>
+<div id="make-it-pretty" class="section level3">
+<h3>Make it pretty</h3>
+<p>Okay, let’s wrap up the Introductory session by making a couple of nice plots to visually compare hypolimnetic oxygen (<code>hypo$do_mgl</code>) between years in which <code>alewife</code> was <code>"present"</code> or <code>"absent"</code>.</p>
+<p>Here is the basic plot to get you started:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>You can view some of the cool options that you can change in a boxplot geometry by running <code>?geom_boxplot</code> in the console. You can also find complete, built-in themes by running <code>?ggtheme</code> in the console. Or, if you’d like to modify one of those or build your own, you can use the <code>theme()</code> function to change basically every aspect of the graph.</p>
+<p>We’ll take some time to play with these options to wrap things up for the Introductory session.</p>
+<p>Of course, these data could also be represented easily using a histogram:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> do_mgl, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>If you prefer violin plots over boxplots (no shame in that game), you can basically copy-and-paste the boxplot code and just replace the geometry!</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="st">  </span><span class="kw">geom_violin</span>()</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Any of the modifications you make the the overall plot will be more-or-less transferrable outside of the specific geometry you choose (e.g. <code>geom_boxplot()</code>, <code>geom_point()</code>, <code>geom_line()</code>, <code>geom_violin()</code>, <code>geom_histogram()</code>). This means you can basically copy and paste all of your plotting code once you have a style with which you are happy.</p>
+<p>I will demonstrate some of these with the violin plots.</p>
+<p>You can also layer on other geometries by adding a <code>+</code> to the previous code. Here is an example that shows the raw data jittered over the violin plots and uses an <code>alpha</code> channel to assign transparencies in each of the respective geometries while maintaining a consistent set of aesthetics.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>) <span class="op">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>)</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-21-1.png" width="672" /> We could tweak a few of the options in the <code>geom_violin()</code> function. Remember to run <code>?geom_violin</code> to see these options. I’ll add a line to each violin for the median (50th percentile).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb21-2"><a href="#cb21-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>, <span class="dt">draw_quantiles =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>)</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>And, of course we have full control over axis titles, group names, and how the legend is displayed.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>, <span class="dt">draw_quantiles =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>) <span class="op">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Absent&quot;</span>, <span class="st">&quot;Present&quot;</span>)) <span class="op">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Alewife presence or absence&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb22-10"><a href="#cb22-10"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>)</span>
+<span id="cb22-11"><a href="#cb22-11"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>If you don’t like the default panel layout, you can use a built-in <code>ggtheme</code> to change it, or add arguments to the <code>theme()</code> function to modify specific elements, or both, like this:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>, <span class="dt">draw_quantiles =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>) <span class="op">+</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Absent&quot;</span>, <span class="st">&quot;Present&quot;</span>)) <span class="op">+</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Alewife presence or absence&quot;</span>) <span class="op">+</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb23-11"><a href="#cb23-11"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>),</span>
+<span id="cb23-12"><a href="#cb23-12"></a>        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb23-13"><a href="#cb23-13"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>And finally, of course, we can change the colors manually or using color palettes. In this case, we have two levels so I will do it manually:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb24-2"><a href="#cb24-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>, <span class="dt">draw_quantiles =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>) <span class="op">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Absent&quot;</span>, <span class="st">&quot;Present&quot;</span>)) <span class="op">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Alewife presence or absence&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb24-13"><a href="#cb24-13"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>),</span>
+<span id="cb24-14"><a href="#cb24-14"></a>        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb24-15"><a href="#cb24-15"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>And, of course, if you really hate violin plots and wish I would have stuck with the boxplot, you can just swap out the geometry that is being used here!!</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb25-2"><a href="#cb25-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>, <span class="dt">width =</span> <span class="fl">0.3</span>) <span class="op">+</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>, <span class="dt">width =</span> <span class="fl">.1</span>) <span class="op">+</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Absent&quot;</span>, <span class="st">&quot;Present&quot;</span>)) <span class="op">+</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Alewife presence or absence&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb25-13"><a href="#cb25-13"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>),</span>
+<span id="cb25-14"><a href="#cb25-14"></a>        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb25-15"><a href="#cb25-15"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>And, we could just as easily swap back to using a histogram by making just a couple of quick tweaks to the plotting code!</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb26-2"><a href="#cb26-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>) <span class="op">+</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency of observation&quot;</span>) <span class="op">+</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb26-11"><a href="#cb26-11"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>),</span>
+<span id="cb26-12"><a href="#cb26-12"></a>        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb26-13"><a href="#cb26-13"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>And, we could just as easily wrap these into a multi-faceted plot, if you prefer, by using the <code>facet_wrap()</code> function like this:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">ggplot</span>(hypo, </span>
+<span id="cb27-2"><a href="#cb27-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> do_mgl, <span class="dt">color =</span> alewife, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">alpha =</span> <span class="fl">0.20</span>) <span class="op">+</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency of observation&quot;</span>) <span class="op">+</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Dissolved oxygen (mg/l)&quot;</span>) <span class="op">+</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Alewife&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Alewife&quot;</span>) <span class="op">+</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>alewife) <span class="op">+</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">-1</span>),</span>
+<span id="cb27-12"><a href="#cb27-12"></a>        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="dv">3</span>),</span>
+<span id="cb27-13"><a href="#cb27-13"></a>        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb27-14"><a href="#cb27-14"></a>        )</span></code></pre></div>
+<p><img src="Introductory-II_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+</div>
+<div id="summary-and-next-steps" class="section level2">
+<h2>Summary and next steps</h2>
+<p>Hopefully the power of these data manipulation and plotting techniques is starting to resonate with you. The workflow is a little tough to wrap your head around at first, but once you get it down you can re-use it again and again. This is the reason why the whole world is using these techniques now. Just think about how much time these plots would have taken to build and customize in Excel or Sigma!! This is time you can now spend collecting data, paddling around your favorite lake, fishing your favorite stream, playing with your kids, or writing your dissertation. You’re welcome.</p>
+<p>We will continue to apply these techniques in more advanced workshops. If you are dying for more just Google “How to ____ in ggplot” and you will be served more examples than you can complete in a lifetime!</p>
+</div>
+
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

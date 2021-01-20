@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introductory R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">We R NYCAFS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="software.html">Before the workshops</a>
+</li>
+<li>
+  <a href="content.html">Workshop modules</a>
+</li>
+<li>
+  <a href="resources.html">Additional Resources</a>
+</li>
+<li>
+  <a href="instructors.html">Instructors</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.youtube.com/channel/UCB1l-SSnpD7ndeNe7Fbg4_g">
+    <span class="fa fa-youtube"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/danStich/we-r-nycafs">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introductory R</h1>
+
+</div>
+
+
+<p><img src="images/roh.png" alt=""></p>
+<p>Welcome to programming in R! This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. We won’t follow this internet module to the letter in our time together, but we will discuss the same topics, and in about the same order. Hopefully, this tutorial will be helpful in either preparing you for the workshop or for revisiting important concepts after the workshop. (I will add links to live-stream content after the workshops have concluded, permission pending.)</p>
+<p>Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a>) can help you along the way by serving as handy references.</p>
+<div id="working-with-code" class="section level2">
+<h2><strong>Working with code</strong></h2>
+<p>We will spend a bit of time during the introductory session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.</p>
+<p>There are a lot of different ways to write computer code. Each has pros and cons and <strong>all</strong> of them are intended to increase efficiency and readability. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:</p>
+<div id="commenting-code-is-helpful" class="section level3">
+<h3><strong>Commenting code is helpful</strong></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># This is a comment.</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># We know because it is preceded</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># by a hashtag, or &#39;octothorpe&#39;.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># R ignores comments so you have</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># a way to write down what you have</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># done or what you are doing.</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># This is useful for sharing</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># code or just figuring out</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># what you did.</span></span></code></pre></div>
+</div>
+<div id="there-are-a-few-ways-to-run-code" class="section level3">
+<h3><strong>There are a few ways to run code:</strong></h3>
+<ol style="list-style-type: decimal">
+<li><p>Click on a line of code and press <code>Ctrl + Enter</code>.</p></li>
+<li><p>Highlight a chunk of code and do the same.</p></li>
+<li><p>Either 1 or 2, but press the <code>Run</code> button at the top of the source file to run the code block.</p></li>
+<li><p>Once you’ve run a code block you can change it and then press the button next to <code>Run</code> (or <code>Ctrl + Shift + P</code>) to ‘re-run’ the previous block of code.</p></li>
+</ol>
+<blockquote>
+<p>Try it on your own!</p>
+</blockquote>
+<p>Type the following line of code into a blank source file, and run it using one of the methods above.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Add 1 and 1 together</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
+</div>
+<div id="some-stricter-r-programming-rules" class="section level3">
+<h3><strong>Some stricter R programming rules:</strong></h3>
+<p>All code is in R is case sensitive.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example (run the following lines):</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>A &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Are these two things equal?</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>a <span class="op">==</span><span class="st"> </span>A</span>
+<span id="cb3-7"><a href="#cb3-7"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span></span></code></pre></div>
+<p>We have few things going on above.</p>
+<ol style="list-style-type: decimal">
+<li><p>We’ve defined a couple of objects for the first time. You do this by assigning the value on the right of the arrow to the variable on the left. We can use the assignment arrow <code>&lt;-</code> or an equal sign <code>=</code>. The former is preferred, but for our purposes it will make absolutely no difference, and <code>=</code> is faster to type than <code>&lt;-</code> until you know your speed-key combinations.</p></li>
+<li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then R would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This <strong>operator</strong> is very useful, and is common to a number of programming languages.</p></li>
+<li><p>Note in the output that the two objects are not the same, and R knows this when we test to see.</p></li>
+</ol>
+<p>You can’t start an object name with a number, but you can end it with one.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># This won&#39;t work</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>1a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># But this one works</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Try it by typing</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># a1,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># print(a) or</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># show(a)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># in the console:</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>a1 &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<p>R will overwrite objects sequentially, so don’t name two things the same unless you don’t need the first. Even then it is risky business. In the example below, our object <code>a</code> takes on the second value provided.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>a &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>a</span>
+<span id="cb5-5"><a href="#cb5-5"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
+<p>Some things can be expressed in multiple ways. For example, both “<code>T</code>” and “<code>TRUE</code>” can be used to indicate a logical value of <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
+<p>Some names are reserved or pre-defined. Did you notice that R already knew what <code>T</code> and <code>TRUE</code> were without us defining them? These reserved operators, and built in <strong>functions</strong> are the building blocks of the R language.</p>
+<p>For example,</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</span></code></pre></div>
+<p>…and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.</p>
+<p>Some <strong>symbols</strong> are also reserved for special use as operators, like:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">+</span>, <span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</span></code></pre></div>
+<p>…and a bunch of others.</p>
+<h3 id="multi">
+<strong>Some other handy tricks</strong>
+</h3>
+<p>The <code>Home</code> button will move you to the start of the line of code, and to the start of the line if you press it twice. The <code>End</code> button on your keyboard will take you to the end of a line. These will help you move around your code faster.</p>
+<p>The <code>Tab</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>Shift + Tab</code> will move code to the left. These can help you organize your code quickly.</p>
+<p>A Single click of the mouse will move the cursor into position. Double-click will highlight the word you are clicking, and a triple left-click will highlight an entire line.</p>
+<p>Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press <code>Ctrl + F</code> to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.</p>
+</div>
+</div>
+<div id="functions-are-the-life-blood" class="section level2">
+<h2><strong>Functions are the life blood</strong></h2>
+<p>Functions make R what it is. These are all of the “commands” that are available to a user through the base software, or through <strong>packages</strong> that can be added on. When you can’t find the function you need, you can write one to do it (eventually). At their most basic level, <strong>functions</strong> do stuff to <strong>objects</strong> in R. This is what makes R both a functional programming language and an object-oriented programming language.</p>
+</div>
+<div id="data-structures-and-manipulation" class="section level2">
+<h2><strong>Data structures and manipulation</strong></h2>
+<h3 id="multi">
+Vectors
+</h3>
+<p>Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of functionality outside this original scope. R is what is known as a “high-level” or “interpreted” language. This means the pieces that make it up are a little more intuitive to the average user than low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. Because anyone can write new functions for R, it has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language.</p>
+<p>Part of this flexibility comes from the fact that R is also a “vectorized” language. Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
+<p>Let’s take a look at how this works and why it matters. Here, we have defined an object, <code>a</code>, as a variable with the value of <code>1</code>…or have we?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>a</span>
+<span id="cb9-3"><a href="#cb9-3"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
+<p>What is the square bracket in the output here? It’s an index. The index is telling us that the first element of <code>a</code> is <code>1</code>. This means that <code>a</code> is actually a “vector”, not a “scalar” or singular value. You can think of a vector as a column in a spreadsheet or a data table. By treating every variable as a vector, or an element thereof, the language becomes much more general.</p>
+<p>So, even if we define something with a single value, it is still just a vector with one element. For us, this is important because of the way that it lets us do math. It makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. It makes working through the math a zillion times easier than on paper! In terms of programming, it can make a lot of things easier, too.</p>
+<p>The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox <em>that</em> is. Let’s play with some:</p>
+<div id="atomic-vectors" class="section level4">
+<h4><strong>Atomic vectors</strong></h4>
+<p>A vector that can hold one and only one kind of data:</p>
+<ul>
+<li>Character</li>
+<li>Numeric</li>
+<li>Integer</li>
+<li>Logical</li>
+<li>Factor</li>
+<li>Date/time</li>
+</ul>
+<p>And some others, but none with which we’ll concern ourselves.</p>
+<p>Below are some examples of <code>atomic vectors</code>. Run the code to see what it does:</p>
+</div>
+<div id="integers-and-numerics" class="section level4">
+<h4><strong>Integers and numerics</strong></h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1-5</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">show</span>(a) <span class="co"># Another way to look at it</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>a <span class="co"># A third way to look at it</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">str</span>(a) <span class="co"># Look at the structure, integer class</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Define the same vector using a sequence</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">str</span>(a)</span>
+<span id="cb14-4"><a href="#cb14-4"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+</div>
+<div id="characters-and-factors" class="section level4">
+<h4><strong>Characters and factors</strong></h4>
+<p><strong>Characters</strong> are anything that is represented as text strings.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>) <span class="co"># Make a character vector</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>b <span class="co"># Print it to the console</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">str</span>(b) <span class="co"># Now it&#39;s a character vector</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a> chr [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>b &lt;-<span class="st"> </span><span class="kw">as.factor</span>(b) <span class="co"># But we can change if we want</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>b</span>
+<span id="cb17-3"><a href="#cb17-3"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb17-4"><a href="#cb17-4"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">str</span>(b) <span class="co"># Look at the data structure</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a> Factor w<span class="op">/</span><span class="st"> </span><span class="dv">5</span> levels <span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
+<p>This is what it looks like when we code a factor as number:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">as.numeric</span>(b)</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># What did that do?</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>?as.numeric</span></code></pre></div>
+<p>Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it…in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.</p>
+</div>
+<div id="logical-vectors" class="section level4">
+<h4><strong>Logical vectors</strong></h4>
+<p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>c &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span>b</span>
+<span id="cb20-3"><a href="#cb20-3"></a>c</span>
+<span id="cb20-4"><a href="#cb20-4"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">str</span>(c)</span>
+<span id="cb21-2"><a href="#cb21-2"></a> logi [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">is.na</span>(a) <span class="co"># We can check for missing values</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">!</span><span class="kw">is.na</span>(a) <span class="co"># The exclamation point means &#39;not&#39;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>a <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="co"># We can see if specific elements meet a criterion</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">unique</span>(b) <span class="co"># We can just look at unique values</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb26-3"><a href="#cb26-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
+</div>
+<div id="vector-operations" class="section level4">
+<h4><strong>Vector operations</strong></h4>
+<p>A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.</p>
+<p>For example, we can reference specific elements of vectors directly. Here, we specify that we want to print the third element of <code>a</code>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># This one just prints it</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>a[<span class="dv">3</span>]</span>
+<span id="cb27-3"><a href="#cb27-3"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># This one stores it in a new object</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</span></code></pre></div>
+<blockquote>
+<p>Important</p>
+</blockquote>
+<p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
+<p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>b[b <span class="op">==</span><span class="st"> &quot;c&quot;</span>]</span>
+<span id="cb29-2"><a href="#cb29-2"></a>[<span class="dv">1</span>] c</span>
+<span id="cb29-3"><a href="#cb29-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">which</span>(b <span class="op">==</span><span class="st"> &quot;c&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<p>Perhaps more practically speaking, we can do elemen-twise math operations on vectors easily in R.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>a <span class="op">*</span><span class="st"> </span><span class="fl">.5</span> <span class="co"># Multiplication</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>a <span class="op">+</span><span class="st"> </span><span class="dv">100</span> <span class="co"># Addition</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>[<span class="dv">1</span>] <span class="dv">101</span> <span class="dv">102</span> <span class="dv">103</span> <span class="dv">104</span> <span class="dv">105</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>a <span class="op">-</span><span class="st"> </span><span class="dv">3</span> <span class="co"># Subtraction</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>[<span class="dv">1</span>] <span class="dv">-2</span> <span class="dv">-1</span>  <span class="dv">0</span>  <span class="dv">1</span>  <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>a <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="co"># Division</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>a<span class="op">^</span><span class="dv">2</span> <span class="co"># Exponentiation</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">4</span>  <span class="dv">9</span> <span class="dv">16</span> <span class="dv">25</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">exp</span>(a) <span class="co"># This is the same as &#39;e to the...&#39;</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>[<span class="dv">1</span>]   <span class="fl">2.718282</span>   <span class="fl">7.389056</span>  <span class="fl">20.085537</span>  <span class="fl">54.598150</span> <span class="fl">148.413159</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">log</span>(a) <span class="co"># Natural logarithm</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.6931472</span> <span class="fl">1.0986123</span> <span class="fl">1.3862944</span> <span class="fl">1.6094379</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">log10</span>(a) <span class="co"># Log base 10</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.3010300</span> <span class="fl">0.4771213</span> <span class="fl">0.6020600</span> <span class="fl">0.6989700</span></span></code></pre></div>
+<p>We can also do string manipulation really easily:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>b &lt;-<span class="st"> </span><span class="kw">as.character</span>(b)</span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">paste</span>(b, <span class="st">&quot;AAAA&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># We can append text</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>[<span class="dv">1</span>] <span class="st">&quot;aAAAA&quot;</span> <span class="st">&quot;bAAAA&quot;</span> <span class="st">&quot;cAAAA&quot;</span> <span class="st">&quot;dAAAA&quot;</span> <span class="st">&quot;eAAAA&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># We can do it the other way</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;--&quot;</span>) <span class="co"># Add symbols to separate</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAA--a&quot;</span> <span class="st">&quot;AAAA--b&quot;</span> <span class="st">&quot;AAAA--c&quot;</span> <span class="st">&quot;AAAA--d&quot;</span> <span class="st">&quot;AAAA--e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;AAAA&quot;</span>, b) <span class="co"># We can replace text</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>    <span class="st">&quot;b&quot;</span>    <span class="st">&quot;AAAA&quot;</span> <span class="st">&quot;d&quot;</span>    <span class="st">&quot;e&quot;</span>   </span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>e &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># Make a new object</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>e <span class="co"># Print to console</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">substr</span>(e, <span class="dt">start =</span> <span class="dv">5</span>, <span class="dt">stop =</span> <span class="dv">5</span>) <span class="co"># We can strip text (or dates, or times, etc.)</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<p>We can check how many elements are in a vector.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>a <span class="co"># Yup, looks about right</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<p>And we can do lots of other nifty things like this.</p>
+</div>
+<div id="matrices" class="section level3">
+<h3><strong>Matrices</strong></h3>
+<p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
+<p>We can make matrices by binding vectors that already exist</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">cbind</span>(a, e)</span>
+<span id="cb47-2"><a href="#cb47-2"></a>     a   e      </span>
+<span id="cb47-3"><a href="#cb47-3"></a>[<span class="dv">1</span>,] <span class="st">&quot;1&quot;</span> <span class="st">&quot;AAAAa&quot;</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>[<span class="dv">2</span>,] <span class="st">&quot;2&quot;</span> <span class="st">&quot;AAAAb&quot;</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>[<span class="dv">3</span>,] <span class="st">&quot;3&quot;</span> <span class="st">&quot;AAAAc&quot;</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>[<span class="dv">4</span>,] <span class="st">&quot;4&quot;</span> <span class="st">&quot;AAAAd&quot;</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>[<span class="dv">5</span>,] <span class="st">&quot;5&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<p>Or we can make an empty one to fill.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>] [,<span class="dv">4</span>]</span>
+<span id="cb48-3"><a href="#cb48-3"></a>[<span class="dv">1</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>[<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>[<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span></code></pre></div>
+<p>Or we can make one from scratch.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">ncol</span>(mat) <span class="co"># Number of columns</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">nrow</span>(mat) <span class="co"># Number of rows</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>mat[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># Value of row 2, column 3</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>[<span class="dv">1</span>] <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">str</span>(mat)</span>
+<span id="cb54-2"><a href="#cb54-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span></code></pre></div>
+<p>See how number of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">colnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;first&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;third&quot;</span>)</span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">rownames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;This&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;matrix&quot;</span>)</span>
+<span id="cb55-3"><a href="#cb55-3"></a>mat</span>
+<span id="cb55-4"><a href="#cb55-4"></a>       first second third</span>
+<span id="cb55-5"><a href="#cb55-5"></a>This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">str</span>(mat) <span class="co"># Take a look to understand</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span>
+<span id="cb56-3"><a href="#cb56-3"></a> <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;dimnames&quot;</span>)=List of <span class="dv">2</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="st">&quot;This&quot;</span> <span class="st">&quot;is&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;matrix&quot;</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="st">&quot;first&quot;</span> <span class="st">&quot;second&quot;</span> <span class="st">&quot;third&quot;</span></span></code></pre></div>
+<p>All the same operations we did on vectors above…one example.</p>
+<p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices (and arrays) to do the heavy lifting behind the scenes.</p>
+</div>
+<div id="dataframes" class="section level3">
+<h3><strong>Dataframes</strong></h3>
+<p>Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type! They are basically a whole bunch of vectors that are smashed together into a single container.</p>
+<p>Referencing specific elements of a dataframe is similar to a matrix, but we can also access columns (“variables”) by name using the <code>$</code> to reference the column we want from within a dataframe. We’ll look at this with some real data so it’s more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let’s read in our first real data file as most of our data are stored that way and will be read in as <code>.csv</code> or <code>.txt</code> files.</p>
+</div>
+<div id="lists" class="section level3">
+<h3><strong>Lists</strong></h3>
+<p>We won’t talk about lists for this workshop, but it is important that you’ve heard of them because most of the down-and-dirty, real programming in R relies heavily on lists. Lists are a special kind of vector that can hold multiple data types. Those data types can even be different types of objects, like vectors, dataframes, matrices, or even other lists! Loosely speaking, your workspace even functions as a special kind of list that contains each of the things you’ve created. It’s lists all the way down, people.</p>
+</div>
+</div>
+<div id="loading-data-from-files" class="section level2">
+<h2><strong>Loading data from files</strong></h2>
+<p>First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., <code>setwd("C:/Users/.../physical.csv")</code>), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in <em>this</em> case). Then, we can set the working directory in R to that folder using any number of different options. My preferences is to either work out of R projects, or to use <code>Session &gt; Set Working Directory &gt; To Source File Location</code>.</p>
+<p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our <code>Environment</code>. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
+<p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/physical.csv&quot;</span>)</span></code></pre></div>
+<p>If it looks like nothing happened, then it probably worked. Have a look at your <code>Environment</code> tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
+<p>You can also look at whether it is included in the Environment like this:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">ls</span>()</span></code></pre></div>
+</div>
+<div id="data-summaries" class="section level2">
+<h2><strong>Data summaries</strong></h2>
+<p>Now that we have some real data, let’s break it down a little bit. Go ahead and give these a try to see what kind of information they each give you about the data set.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">ls</span>() <span class="co"># We can use ls() to see what is in our environment</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="kw">head</span>(otsego) <span class="co"># Look at the first six rows of data in the object</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="kw">nrow</span>(otsego) <span class="co"># How many rows does it have?</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="kw">ncol</span>(otsego) <span class="co"># How many columns?</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="kw">names</span>(otsego) <span class="co"># What are the column names?</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a><span class="kw">str</span>(otsego) <span class="co"># Have a look at the data structure</span></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="kw">summary</span>(otsego) <span class="co"># Summarize the variables in the dataframe</span></span></code></pre></div>
+<p>Now let’s look at some specific things.</p>
+<p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>otsego[<span class="dv">12</span>, <span class="dv">4</span>]</span>
+<span id="cb60-2"><a href="#cb60-2"></a>[<span class="dv">1</span>] <span class="dv">1988</span></span></code></pre></div>
+<p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>otsego[<span class="dv">12</span>, <span class="st">&quot;depth&quot;</span>]</span>
+<span id="cb61-2"><a href="#cb61-2"></a>[<span class="dv">1</span>] <span class="dv">25</span></span></code></pre></div>
+<p>More realistically, we might want to know the average temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">mean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth <span class="op">==</span><span class="st"> </span><span class="fl">10.0</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb62-2"><a href="#cb62-2"></a>[<span class="dv">1</span>] <span class="fl">10.49944</span></span></code></pre></div>
+<p>Wow…heavy stuff, but this is how the wheels turn.</p>
+<p>Let’s look at a better way to summarize these data by year. To do this, we’ll load the <code>tidyverse</code> package. This is actually a collection of packages designed to improve logical flow and presentation of data manipulation (so we don’t have to use <code>$</code> and <code>[ ]</code> all the time because that’s hard to read!!).</p>
+</div>
+<div id="better-data-summaries" class="section level2">
+<h2><strong>Better data summaries</strong></h2>
+<p>We’ll quickly demonstrate a very useful data summary pipeline that is supported by a couple of different packages from the <code>tidyverse</code>, so I am going to load the whole suite at once. You will need to install this first using <code>install.packages("tidyverse")</code> or one of the techniques demonstrated in live and recorded content.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>You will probably get a bunch of messages to tell you which packages have been loaded and if there were any <code>NAMESPACE</code> conflicts of functions that are “masked” from base R. None of these will affect us. I just told R not to print it on the website.</p>
+<p>Now that we’ve loaded this suite of data management tools, we can summarize temperature in our data set really easily.</p>
+<p>First, we will group the data set by month and depth so that behind the scenes R knows this is our grouping structure:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">group_by</span>(otsego, month, depth)</span></code></pre></div>
+<p>Note that this changes <code>otsego</code> into a <code>tibble</code>, which is basically just a fancy dataframe with attributes like <code>Groups</code>.</p>
+<p>Now, we can summarize temperature by depth in each month across years:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>otsego_summary &lt;-<span class="st"> </span><span class="kw">summarize</span>(otsego, <span class="dt">mean_temp =</span> <span class="kw">mean</span>(temp), <span class="dt">sd_temp =</span> <span class="kw">sd</span>(temp))</span></code></pre></div>
+<p>You’ll get a message here to let you know that <code>summarise</code> is using the grouping structure that you had previously specified, and it is sorting by <code>month</code>.</p>
+<p>If you print your new object, you’ll see that it has four columns: <code>month</code>, <code>depth</code>, <code>mean_temp</code>, and <code>sd_temp</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">print</span>(otsego_summary)</span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="co"># A tibble: 272 x 4</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="co"># Groups:   month [12]</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a>   month depth mean_temp sd_temp</span>
+<span id="cb66-5"><a href="#cb66-5"></a>   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="st"> </span><span class="dv">1</span>     <span class="dv">1</span>   <span class="fl">0.1</span>      <span class="fl">1.73</span>   <span class="fl">1.33</span> </span>
+<span id="cb66-7"><a href="#cb66-7"></a> <span class="dv">2</span>     <span class="dv">1</span>   <span class="dv">2</span>        <span class="fl">2.10</span>   <span class="fl">1.07</span> </span>
+<span id="cb66-8"><a href="#cb66-8"></a> <span class="dv">3</span>     <span class="dv">1</span>   <span class="dv">4</span>        <span class="fl">2.12</span>   <span class="fl">0.988</span></span>
+<span id="cb66-9"><a href="#cb66-9"></a> <span class="dv">4</span>     <span class="dv">1</span>   <span class="dv">6</span>        <span class="fl">2.25</span>   <span class="fl">0.962</span></span>
+<span id="cb66-10"><a href="#cb66-10"></a> <span class="dv">5</span>     <span class="dv">1</span>   <span class="dv">8</span>        <span class="fl">2.37</span>   <span class="fl">0.908</span></span>
+<span id="cb66-11"><a href="#cb66-11"></a> <span class="dv">6</span>     <span class="dv">1</span>  <span class="dv">10</span>        <span class="fl">2.39</span>   <span class="fl">0.880</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a> <span class="dv">7</span>     <span class="dv">1</span>  <span class="dv">12</span>        <span class="fl">2.5</span>    <span class="fl">0.860</span></span>
+<span id="cb66-13"><a href="#cb66-13"></a> <span class="dv">8</span>     <span class="dv">1</span>  <span class="dv">14</span>        <span class="fl">2.52</span>   <span class="fl">0.813</span></span>
+<span id="cb66-14"><a href="#cb66-14"></a> <span class="dv">9</span>     <span class="dv">1</span>  <span class="dv">16</span>        <span class="fl">2.60</span>   <span class="fl">0.813</span></span>
+<span id="cb66-15"><a href="#cb66-15"></a><span class="dv">10</span>     <span class="dv">1</span>  <span class="dv">18</span>        <span class="fl">2.65</span>   <span class="fl">0.787</span></span>
+<span id="cb66-16"><a href="#cb66-16"></a><span class="co"># ... with 262 more rows</span></span></code></pre></div>
+<p>As a teaser for after the break, we could make a quick scatterplot using <code>ggplot()</code> as long as we have the <code>tidyverse</code> loaded!</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">ggplot</span>(otsego_summary, <span class="kw">aes</span>(<span class="dt">x =</span> mean_temp, <span class="dt">y =</span> depth)) <span class="op">+</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month)</span></code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>Wow, what a neat picture, but what if we wanted temperature in Fahrenheit for our stakeholders???</p>
+</div>
+<div id="creating-new-variables" class="section level2">
+<h2><strong>Creating new variables</strong></h2>
+<p>So, what if we wanted to do something like convert temperature from Celcius to Fahrenheit? We could make a function to do this for us:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># Define a function to convert temperature</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="co"># in celcius to temperature in farenheit:</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a>cToF &lt;-<span class="st"> </span><span class="cf">function</span>(cels) {</span>
+<span id="cb68-4"><a href="#cb68-4"></a>  faren &lt;-<span class="st"> </span>cels <span class="op">*</span><span class="st"> </span>(<span class="dv">9</span> <span class="op">/</span><span class="st"> </span><span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">32</span></span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="kw">return</span>(faren)</span>
+<span id="cb68-6"><a href="#cb68-6"></a>}</span></code></pre></div>
+<p>And then we can use it to create a new variable in the <code>otsego</code> dataframe, which I have named <code>tempF</code>. This variable (column) is created inside <code>otsego</code> automatically.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># Test the function out.</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="co"># Here, we create a new variable in the</span></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="co"># otsego dataframe to hold the result</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a>otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego<span class="op">$</span>temp)</span></code></pre></div>
+<p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Fahrenheit scale?).</p>
+<p>There are a couple of ways to do this.</p>
+<p>First, we could just use the <code>write.csv</code> function. This one is pretty limited in terms of options, but that also makes it easy to use. We just need to tell R what the object is that we want to write to a csv file and what the name of the file will be. Do be careful because this will overwrite existing files with the same name without asking if that is okay.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">write.csv</span>(<span class="dt">x =</span> otsego, <span class="dt">file =</span> <span class="st">&quot;physicalF.csv&quot;</span>)</span></code></pre></div>
+<p>I like a little more flexibility in the file write process, so I usually use the <code>write.table</code> function. This can be used to achieve the same end depending on options, but allows other options like omitting <code>row.names</code> from the output file. Here is an example of how it works:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co"># Write the data set to a csv file.</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="co"># We specify the object, the filename, and</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="co"># we tell R we don&#39;t want rownames or quotes</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="co"># around character strings. Finally, we tell</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="co"># R to separate columns using a comma.</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a></span>
+<span id="cb71-7"><a href="#cb71-7"></a><span class="co"># We could do exactly the same thing, but use a &quot;.txt&quot;</span></span>
+<span id="cb71-8"><a href="#cb71-8"></a><span class="co"># file extensions, and we would get a comma-separated</span></span>
+<span id="cb71-9"><a href="#cb71-9"></a><span class="co"># text file if we needed one.</span></span>
+<span id="cb71-10"><a href="#cb71-10"></a><span class="kw">write.table</span>(</span>
+<span id="cb71-11"><a href="#cb71-11"></a>  <span class="dt">x =</span> otsego, <span class="dt">file =</span> <span class="st">&quot;physicalF.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb71-12"><a href="#cb71-12"></a>  <span class="dt">quote =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span></span>
+<span id="cb71-13"><a href="#cb71-13"></a>)</span></code></pre></div>
+<p>A third way to write objects from R to a file is by saving it as an R data file (<code>.rda</code> extension). This comes in handy when we have very large or very complex objects. In general, <code>.rda</code> files save and load more quickly because they are stored as <strong>compressed</strong> code (in the form of <strong>lists</strong>). Here is what it looks like:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">save</span>(otsego, <span class="dt">file =</span> <span class="st">&quot;otsego.rda&quot;</span>)</span></code></pre></div>
+<p>When this kind of a data file is loaded back into the environment (using <code>load(file='otsego.rda')</code>)’ it has the same name, but is stored as a <strong>list</strong>. Dun, dun, dun…</p>
+</div>
+<div id="summarizing-and-visualizing-data" class="section level2">
+<h2><strong>Summarizing and visualizing data</strong></h2>
+<p>Now that we have a handle on how R works, and how to get our data in and back out, let’s take a quick break and then we’ll spend some time to re-inforce data manipulation and wrap things up with some plotting!</p>
+<p>Stay tuned!</p>
+<p><br></p>
+</div>
+
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

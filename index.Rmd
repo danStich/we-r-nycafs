@@ -1,0 +1,13 @@
+```{r, child="_styles.Rmd"}
+
+```
+
+---
+title: "We R NYCAFS"
+---
+
+<img src="./images/afs_wordcloud_banner.jpg" alt="">
+
+<h3 id="multi"><b>NY Chapter American Fisheries Society Virtual R Workshop Website</b></h3>
+
+Welcome to the website for virtual R workshops hosted by the <a href="https://newyork.fisheries.org/">New York Chapter American Fisheries Society (NYCAFS)</a>. This site is intended to serve as a permanent link to course content so members and attendees can access online learning modules, data sets, and code used for workshops wherever or whenever they are. Workshop modules can be accessed through the <a href="content.html">Workshop modules</a> page. All modules are self-contained and will include necessary data sets. For help getting started with R, please check out the <a href="software.html">Software</a> and <a href="resources.html">Additional Resources</a> tabs.

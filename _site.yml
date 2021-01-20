@@ -1,0 +1,32 @@
+name: "We R NYCAFS"
+output_dir: "."
+navbar:
+  title: "We R NYCAFS"
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Before the workshops"
+      href: software.html
+    - text: "Workshop modules"
+      href: content.html
+    - text: "Additional Resources"
+      href: resources.html
+    - text: "Instructors"
+      href: instructors.html      
+  right:    
+    - icon: fa-youtube
+      href: https://www.youtube.com/channel/UCB1l-SSnpD7ndeNe7Fbg4_g   
+    - icon: fa-github
+      href: https://github.com/danStich/we-r-nycafs    
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    toc: false
+    smooth_scroll: true
+    fontsize: 12
+    includes:
+      in_header: _header.html
+      after_body: footer.html
+    css: styles.css
+    

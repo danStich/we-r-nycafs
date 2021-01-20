@@ -1,0 +1,70 @@
+<head>
+<style>
+
+#pre code, #code, pre {
+  white-space: pre;
+  overflow-x: scroll;
+  word-break: keep-all;
+  word-wrap: initial;
+  border-radius: 1em;
+}
+
+img {
+  display: inline-block;
+  margin-right: 1em;
+  vertical-align: middle;
+  margin-bottom: 5px;
+}
+
+pre.r {
+  border-radius: 1em;
+  background-color: rgb(240, 240, 240);
+  overflow-x: auto;
+  border: none;
+  margin-bottom: 0;
+}
+
+.content-holder {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+body {
+  font-size: 14pt;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90vw;
+}
+
+p {
+  padding-bottom: 1em;
+}
+
+h1, h2, h3, h4, h5 {
+  margin-top: .5em !important;
+}
+
+#multi {
+  padding-top: .5em;
+} 
+
+</style>
+</head>

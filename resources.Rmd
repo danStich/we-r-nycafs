@@ -1,0 +1,26 @@
+
+```{r, child="_styles.Rmd"}
+```
+
+---
+title: "Additional resources"
+---
+
+At every workshop or during every semester, folks ask about about additional resources so they can keep learning about the unholy power of R. In response to those requests, we provide a brief through the window into the world of all that is available. One of the great things about using a free software program that is super popular is that tons of people have put together how-tos, blogs, forums (Fora? Sounds like flora), websites, and free ebooks. Truthfully, there are more resources out there than can reasonably be accommodated here, but some of the links below contain links to *even more* resources. It's resources all the way down.
+
+Here are a few of our favorites:
+
+<a href="https://www.amazon.com/Introductory-Fisheries-Analyses-Chapman-Hall/dp/148223520X">**Introductory Fisheries Analyses With R**</a>. This is a must-have for any fisheries professional who is interested in getting started in R and wants to focus on Fisheries applications. It covers multiple methods for doing common fisheries statistics using the FSA package in R, and even includes applied examples of more general statistics such as ANOVA and regression. Easy to follow along with and fun to play with. Buy it, seriously. 
+
+<a href="https://rstudio.com/resources/cheatsheets/">**The cheat sheets**</a> The RStudio cheatsheets page is something nobody should ever have to live without. There are literally dozens of these things, and they are super useful. I have gone through periods of learning R when these adorned every nook and cranny of my office. A one-stop shop with something for everyone.
+
+<a href="https://swirlstats.com/students.html">**Swirl**</a> is an R package that was written to help people learn R. What a novel idea, eh? There are a bunch of really handy course modules that you can install through R from the <a href="https://github.com/swirldev/swirl_courses#swirl-courses">Swirl GitHub repo</a>.
+
+<a href="">The Worst Stats Text eveR</a> Not only is it self-unpublished, but it is not even complete! This *is* the Worst Stats Text eveR: an online open educational resource that Dan developed for his classes in Quantitative Biology at SUNY Oneonta. Aimed at the typical undergraduate interested in biology, this text provides a tutorial-style survey of the basics in R and some common statistical tools. Most examples have a distinctly aquatic flavor (one might even call it fishy!). This book is made possible through the wonders of [Bookdown](https://bookdown.org/) and inspired by those that have come before it. There are tons of them out there, go Google it.
+
+<a>**Soc meds??**</a> Totes! <a href="https://twitter.com/hashtag/rstat">#rstat</a> Who'd have thunk it? Well with all of the useless stuff like memes floating around social media (and all the useful stuff like cat videos!) I guess it should come as no surprise that folks are doing great things on social media, like crowd-sourcing a list of links for learning R! Check it out and follow along.
+
+**The interwebs** Finally, when in doubt, the internet is your friend (100% sincere, no sarcasm intended). There are even custom search engines like <a href="https://rseek.org/">**rseek**</a> that will help you filter out the unrelated content. Honestly, regular search engines work great as long as you include `r` as one of your terms. Top-hitting resources that we return to time and again include [Stack Overflow](https://stackoverflow.com/questions/tagged/r) and [R-bloggers](https://www.r-bloggers.com/). You can subscribe and receive updates, too, if that is the kind of daily feed you like to get!
+
+<br>
+ 
