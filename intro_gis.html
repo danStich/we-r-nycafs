@@ -409,7 +409,7 @@ $(document).ready(function () {
 </div>
 
 
-<!-- <img src="./images/secchi.jpg" alt=""> -->
+<p><img src="images/maps.png" alt=""></p>
 <h2 top-margin:10px;><b> Introduction </b></h2>
 <p>As folks learned in the Introductory workshop, once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again for things like plotting, statistics, and even (this time) some GIS. GIS in R??? Yup. To show off this convenience, and the power of R for dealing with spatial data that might otherwise require expensive or memory-hungry programs, we will spend some time reading, transforming, and plotting spatial data with a few of the “go-to” packages.</p>
 <p>The plan for this workshop is to lay out some basics for how to read in spatial data, work with them, and make some pretty maps just to scratch the surface and get people ready for their own adventures. This is a round about way of my saying I really only use R to make maps so that’s what we are doing, but you can do a whole bunch of other cool stuff if that is your thing.</p>
@@ -678,6 +678,33 @@ $(document).ready(function () {
 Historical (1934-1970) and recent (1970-present) records of Alosa aestivalis in New York, USA (Carlson et al. 2016). Records missing exact dates or locations are not displayed.
 </p>
 </div>
+<!-- ```{r} -->
+<!-- png(filename="images/maps.png", -->
+<!--     width = 1600, -->
+<!--     height = 800, -->
+<!--     res = 400, -->
+<!--     pointsize = 2 -->
+<!--     ) -->
+<!-- ggplot() + -->
+<!--   geom_sf(data = st_as_sf(NY), fill = "gray97") + -->
+<!--   geom_jitter( -->
+<!--     data = data.frame(fish_data), -->
+<!--     mapping = aes(x = x, y = y, color = Period), -->
+<!--     alpha = 0.5, size = 2, -->
+<!--     height = 1e4, width = 1e4 -->
+<!--   ) + -->
+<!--   labs(x = "Longitude", y = "Latitude") + -->
+<!--   theme_bw() + -->
+<!--   theme( -->
+<!--     axis.title.x = element_text(vjust = -3), -->
+<!--     axis.title.y = element_text(vjust = 3), -->
+<!--     panel.spacing = unit(.05, "npc"), -->
+<!--     strip.background = element_blank() -->
+<!--   ) + -->
+<!--   facet_wrap(~Period) -->
+<!-- dev.off()   -->
+<!-- ``` -->
+<p><br></p>
 </div>
 
 <!DOCTYPE html>

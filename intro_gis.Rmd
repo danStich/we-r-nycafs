@@ -10,7 +10,7 @@ output:
 title: Introduction to spatial data in R
 ---
 
-<!-- <img src="./images/secchi.jpg" alt=""> -->
+<img src="./images/maps.png" alt="">
 
 <h2 top-margin:10px;><b> Introduction </b></h2> 
 
@@ -369,4 +369,31 @@ ggplot() +
   facet_wrap(~Period)
 ```
 
+<!-- ```{r} -->
+<!-- png(filename="images/maps.png", -->
+<!--     width = 1600, -->
+<!--     height = 800, -->
+<!--     res = 400, -->
+<!--     pointsize = 2 -->
+<!--     ) -->
+<!-- ggplot() + -->
+<!--   geom_sf(data = st_as_sf(NY), fill = "gray97") + -->
+<!--   geom_jitter( -->
+<!--     data = data.frame(fish_data), -->
+<!--     mapping = aes(x = x, y = y, color = Period), -->
+<!--     alpha = 0.5, size = 2, -->
+<!--     height = 1e4, width = 1e4 -->
+<!--   ) + -->
+<!--   labs(x = "Longitude", y = "Latitude") + -->
+<!--   theme_bw() + -->
+<!--   theme( -->
+<!--     axis.title.x = element_text(vjust = -3), -->
+<!--     axis.title.y = element_text(vjust = 3), -->
+<!--     panel.spacing = unit(.05, "npc"), -->
+<!--     strip.background = element_blank() -->
+<!--   ) + -->
+<!--   facet_wrap(~Period) -->
+<!-- dev.off()   -->
+<!-- ``` -->
 
+<br>
