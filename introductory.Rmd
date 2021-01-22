@@ -480,9 +480,7 @@ When this kind of a data file is loaded back into the environment (using `load(f
 
 
 ## **Summarizing and visualizing data**
-Now that we have a handle on how R works, and how to get our data in and back out, let's take a quick break and then we'll spend some time to re-inforce data manipulation and wrap things up with some plotting!
-
-Stay tuned!
+Now that we have a handle on how R works, and how to get our data in and back out, we'll spend some time to re-inforce data manipulation and wrap things up with some plotting in [Introductory-II](Introductory-2.html).
 
 <br>
 

@@ -413,19 +413,19 @@ Data manipulation and visualization
 </h1>
 <p><img src="images/matrixSmolt.jpg" alt=""></p>
 <h2 id="multi">
-Introduction
+<strong>Introduction</strong>
 </h2>
 <p>The objective of the second half of this module is to reinforce common tools that you learned about in the first half of the Introductory session and get you started developing skills in data manipulation and visualization. We will continue to build these skills and integrate them into statistical analyses in the <a href="afternoon.html">Intermediate R workshop</a>.</p>
 <p>By the end of this module, you should be comfortable: 1) reading data into R, 2) conducting some basic data manipulation, 3) generating new variables, and 4) creating and modifying basic plots.</p>
 <div id="exercises" class="section level2">
-<h2>Exercises</h2>
+<h2><strong>Exercises</strong></h2>
 <h3 id="multi">
-Packages
+<strong>Packages</strong>
 </h3>
 <p>We’re going to work with the <code>dplyr</code>, <code>ggplot2</code>, and <code>magrittr</code> packages for this module, so you can go ahead and put some code in your script to load them both from the library where they were installed on your computer. If you installed them with the <code>tidyverse</code>, you can go ahead and load the whole thing all at once [loves this feature].</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <h3>
-Data import
+<strong>Data import</strong>
 </h3>
 <p>Read the data from <code>physical.csv</code> into R from the <code>data</code> directory in your workshop folder using the <code>read.csv()</code> function. If you saved your script in the workshop folder, then you can just run <code>dir(data/)</code> to see the file names and copy and paste from the output into your <code>read.csv()</code> function so you don’t mess up the name.</p>
 <p>The <code>header = TRUE</code> tells R that our columns have names in the first row.</p>
@@ -433,7 +433,7 @@ Data import
 <p>Verify that this worked by checking your <code>Environment</code> tab in your RStudio session or running <code>ls()</code> in the console:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">ls</span>()</span></code></pre></div>
 <div id="data-explanation" class="section level3">
-<h3>Data explanation</h3>
+<h3><strong>Data explanation</strong></h3>
 <p>These are data collected each year from Otsego Lake by students, staff, and faculty at the SUNY Oneonta Biological Field Station in Cooperstown, NY, USA. The data set includes temperature (°C), pH, dissolved oxygen, and specific conductance measurements from a period of about 40 years. There are all kinds of cool spatial and seasonal patterns in the data that we can look at.</p>
 <p>We will use <code>do_mgl</code> for the examples that follow. This variable is a measure of the amount of dissolved oxygen available in the water at each depth on each day of the data set. Dissolved oxygen is important for supporting aerobic organisms that can’t produce their own food through photosynthesis (e.g. aquatic bugs, clams, fish). It has been measured along with other water characteristics to help monitor changes in the lake due to watershed and in-lake management as well as introduced species or climate change.</p>
 <p>One of the biggest changes to Otsego Lake in the last several decades was a reduction in the amount of dissolved oxygen in the deepest water (hypolimnion). A primary cause of this reduction in dissolved oxygen was the introduction of an invasive fish, the alewife (<em>Alosa pseudoharengus</em>). Alewife are really good at eating the microscopic animals (zooplankton) that graze on algae. When they were introduced, the alewife population increased rapidly and basically ate all of the zooplankton that eat algae. This allowed algae to grow out of control during the summer. Once the algae dies each year, it sinks to the bottom of the lake where it is decomposed by aerobic organisms that use up oxygen deep in the lake. The amount of oxygen available is fixed from about June until December each year until seasonal changes cause all of the water to mix together again. This means that the lowest oxygen levels were occurring in the deepest water around October or November each year. Oxygen levels got so low because of this that the deep, cold water needed by popular sport fishes such as lake trout (<em>Salvelinus namaycush</em>) did not have enough oxygen to support them. Therefore, the New York State Department of Environmental Conservation (NYSDEC), SUNY Oneonta Biological Field Station, Otsego Lake Association, and others began stocking walleye (<em>Sander vitreus</em>) to eliminate the alewife and reverse these changes. What a hot mess, huh?!</p>
@@ -441,7 +441,7 @@ Data import
 <p>For this exercise, we will weed through about 30 years of data to summarize changes in dissolved oxygen in Otsego Lake during the last 30 years while all of these cool changes were happening. But, to get there we’ll need to do some data munging and some quality-control to assure that we know what we’re working with. These steps are pretty typical for most data sets you’ll run into, and are a critical part of experimental design and the statistical analyses that we’ll want to conduct later.</p>
 </div>
 <div id="first-steps-for-data" class="section level3">
-<h3>First steps for data</h3>
+<h3><strong>First steps for data</strong></h3>
 <p>I constantly forget about the fancy point-and-click tools that RStudio brings to the table having learned much of my basic R syntax right before that revolution occurred. Make sure that you look at your data structure in your <code>Environment</code> tab or using the <code>str()</code> function.</p>
 <p>You can also use the built-in function <code>summary()</code> to get a closer look at your data.</p>
 <p>Once you’ve taken a look at the data, let’s check out some specifics.</p>
@@ -465,7 +465,7 @@ Data import
 <p>Have a look at it….</p>
 </div>
 <div id="missing-data-and-r" class="section level3">
-<h3>Missing data and R</h3>
+<h3><strong>Missing data and R</strong></h3>
 <p>Uh-oh, looks like something went wrong! We have a whole bunch of <code>NA</code> values in our data!</p>
 <p>Most of the time this is not a big deal, but the default behavior for some functions, such as <code>mean()</code> and <code>sd()</code> will return <code>NA</code> if <em>any</em> of the values in a column are <code>NA</code>. This is good because it lets us know something is funky. In this case, we just have some missing measurements, so we will tell R to remove those observations when it calculates the mean (<code>avg</code>) in our call to <code>summarize()</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
@@ -478,7 +478,7 @@ Data import
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">which</span>(<span class="kw">is.na</span>(...))</span></code></pre></div>
 </div>
 <div id="subsetting-and-plotting" class="section level3">
-<h3>Subsetting and plotting</h3>
+<h3><strong>Subsetting and plotting</strong></h3>
 <p>Now that we have a handle on what the data look like to R we can start to look at some of the trends in dissolved oxygen that I mentioned earlier.</p>
 <p>Let’s start by making a boxplot of <code>do_mgl</code> by <code>year</code> in the <code>otsego</code> data.</p>
 <p>We will use the <code>ggplot()</code> function to create an aesthetic mapping for the plot that tells R what data set to use (<code>otsego</code>), and what column names to assign to the x and y axes. In this case, I provide some separate aesthetics in the boxplot geometry (<code>geom_boxplot()</code> function) so R knows that I want to use <code>year</code> as a grouping variable instead of a numeric variable.</p>
@@ -507,7 +507,7 @@ Data import
 <p>Alright! This looks a lot more like the story I was telling you at the start of this. If only the graph did it justice…don’t worry, you’ll have to make it pretty at the end.</p>
 </div>
 <div id="creating-a-new-variable" class="section level3">
-<h3>Creating a new variable</h3>
+<h3><strong>Creating a new variable</strong></h3>
 <p>Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let’s say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!!</p>
 <p>We’ll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the <code>hypo</code> data frame (shameful, I know).</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>hypo &lt;-<span class="st"> </span>hypo <span class="op">%&gt;%</span></span>
@@ -524,7 +524,7 @@ Data import
 <span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Do it. I&#39;ll demonstrate, don&#39;t worry!</span></span></code></pre></div>
 </div>
 <div id="make-it-pretty" class="section level3">
-<h3>Make it pretty</h3>
+<h3><strong>Make it pretty</strong></h3>
 <p>Okay, let’s wrap up the Introductory session by making a couple of nice plots to visually compare hypolimnetic oxygen (<code>hypo$do_mgl</code>) between years in which <code>alewife</code> was <code>"present"</code> or <code>"absent"</code>.</p>
 <p>Here is the basic plot to get you started:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl, <span class="dt">fill =</span> alewife)) <span class="op">+</span></span>

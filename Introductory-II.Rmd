@@ -5,15 +5,15 @@
 
 <img src="./images/matrixSmolt.jpg" alt="">
 
-<h2 id="multi"> Introduction </h2>
+<h2 id="multi"> **Introduction** </h2>
  
 The objective of the second half of this module is to reinforce common tools that you learned about in the first half of the Introductory session and get you started developing skills in data manipulation and visualization. We will continue to build these skills and integrate them into statistical analyses in the [Intermediate R workshop](afternoon.html).
 
 By the end of this module, you should be comfortable: 1) reading data into R, 2) conducting some basic data manipulation, 3) generating new variables, and 4) creating and modifying basic plots. 
 
-## Exercises
+## **Exercises**
 
-<h3 id="multi"> Packages </h3>
+<h3 id="multi"> **Packages** </h3>
 
 We're going to work with the `dplyr`, `ggplot2`, and `magrittr` packages for this module, so you can go ahead and put some code in your script to load them both from the library where they were installed on your computer. If you installed them with the `tidyverse`, you can go ahead and load the whole thing all at once [loves this feature].
 ```{r, message=FALSE, warning = FALSE}
@@ -21,7 +21,7 @@ library(tidyverse)
 
 ```
 
-<h3> Data import </h3>
+<h3>**Data import**</h3>
 
 Read the data from `physical.csv` into R from the `data` directory in your workshop folder using the `read.csv()` function. If you saved your script in the workshop folder, then you can just run `dir(data/)` to see the file names and copy and paste from the output into your `read.csv()` function so you don't mess up the name. 
 
@@ -39,7 +39,7 @@ ls()
 
 ```
 
-### Data explanation
+### **Data explanation**
 These are data collected each year from Otsego Lake by students, staff, and faculty at the SUNY Oneonta Biological Field Station in Cooperstown, NY, USA. The data set includes temperature (°C), pH, dissolved oxygen, and specific conductance measurements from a period of about 40 years. There are all kinds of cool spatial and seasonal patterns in the data that we can look at. 
 
 We will use `do_mgl` for the examples that follow. This variable is a measure of the amount of dissolved oxygen available in the water at each depth on each day of the data set. Dissolved oxygen is important for supporting aerobic organisms that can't produce their own food through photosynthesis (e.g. aquatic bugs, clams, fish). It has been measured along with other water characteristics to help monitor changes in the lake due to watershed and in-lake management as well as introduced species or climate change.
@@ -50,7 +50,7 @@ It turns out that these folks were actually successful in eliminating the alewif
 
 For this exercise, we will weed through about 30 years of data to summarize changes in dissolved oxygen in Otsego Lake during the last 30 years while all of these cool changes were happening. But, to get there we'll need to do some data munging and some quality-control to assure that we know what we're working with. These steps are pretty typical for most data sets you'll run into, and are a critical part of experimental design and the statistical analyses that we'll want to conduct later.
 
-### First steps for data
+### **First steps for data**
 
 I constantly forget about the fancy point-and-click tools that RStudio brings to the table having learned much of my basic R syntax right before that revolution occurred. Make sure that you look at your data structure in your `Environment` tab or using the `str()` function. 
 
@@ -94,7 +94,7 @@ If you don't like the message that `summarize()` produces, you can add `groups =
 
 Have a look at it....
 
-### Missing data and R
+### **Missing data and R**
 
 Uh-oh, looks like something went wrong! We have a whole bunch of `NA` values in our data!
 
@@ -118,7 +118,7 @@ which(is.na(...))
 ```
 
 
-### Subsetting and plotting
+### **Subsetting and plotting**
 
 Now that we have a handle on what the data look like to R we can start to look at some of the trends in dissolved oxygen that I mentioned earlier.
 
@@ -166,7 +166,7 @@ ggplot(hypo, aes(x = year, y = do_mgl)) +
 
 Alright! This looks a lot more like the story I was telling you at the start of this. If only the graph did it justice...don't worry, you'll have to make it pretty at the end.
 
-### Creating a new variable
+### **Creating a new variable**
 Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let's say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!! 
 
 We'll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the `hypo` data frame (shameful, I know).
@@ -200,7 +200,7 @@ Now if we wanted to, we could calculate the mean `do_mgl` in years when `alewife
 ```
 
 
-### Make it pretty
+### **Make it pretty**
 Okay, let's wrap up the Introductory session by making a couple of nice plots to visually compare hypolimnetic oxygen (`hypo$do_mgl`) between years in which `alewife` was `"present"` or `"absent"`.
 
 Here is the basic plot to get you started:

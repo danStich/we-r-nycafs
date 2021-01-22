@@ -29,4 +29,3 @@ output:
       in_header: _header.html
       after_body: footer.html
     css: styles.css
-    

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introduction to spatial data in R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">We R NYCAFS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="software.html">Before the workshops</a>
+</li>
+<li>
+  <a href="content.html">Workshop modules</a>
+</li>
+<li>
+  <a href="resources.html">Additional Resources</a>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://www.youtube.com/channel/UCB1l-SSnpD7ndeNe7Fbg4_g">
+    <span class="fa fa-youtube"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/danStich/we-r-nycafs">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction to spatial data in R</h1>
+
+</div>
+
+
+<!-- <img src="./images/secchi.jpg" alt=""> -->
+<h2 top-margin:10px;><b> Introduction </b></h2>
+<p>As folks learned in the Introductory workshop, once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again for things like plotting, statistics, and even (this time) some GIS. GIS in R??? Yup. To show off this convenience, and the power of R for dealing with spatial data that might otherwise require expensive or memory-hungry programs.</p>
+<p>The plan for this workshop is to lay out some basics for how to read in spatial data, work with them, and make some pretty maps just to scratch the surface and get people ready for their own adventures. This is a round about way of my saying I really only use R to make maps so that’s what we are doing, but you can do a whole bunch of other cool stuff if that is your thing.</p>
+<p>We will work with functions from a bunch of packages within the <code>tidyverse</code> for this session. You can go ahead and load that now. We will load a few others as we go along in this module, and during the live-stream workshops.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div id="data-overview-and-management" class="section level2">
+<h2><strong>Data overview and management</strong></h2>
+<p>Let’s start by reading in part of the data used to create the New York State Museum Atlas of Inland Fishes <a href="http://www.nysm.nysed.gov/staff-publications/atlas-inland-fishes-new-york">(Carlson et al). 2016</a>. This particular data set is a subset of the whole that I pared down for convenience and to meet the maximum file size required by GitHub. We read the data in with the argument <code>stringsAsFactors = FALSE</code> because there are a lot of string variables in the data, and factors can add extra handling time to our workflow (see <a href="introductory.html"> Introductory session tutorial </a>).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>atlas &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nysm-fish-atlas-database.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>So, what are we working with here? Let’s have a look. Remember from the Introductory session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the <strong>structure</strong> of your data using <code>str()</code> or to take a peek at the data in your Environment tab.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Like this:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">str</span>(atlas)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">384762</span> obs. of  <span class="dv">5</span> variables<span class="op">:</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st"> </span><span class="er">$</span><span class="st"> </span>species    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Notropis anogenus&quot;</span> <span class="st">&quot;Noturus miurus&quot;</span> <span class="st">&quot;Lepomis gibbosus&quot;</span> <span class="st">&quot;Ichthyomyzon unicuspis&quot;</span> ...</span>
+<span id="cb3-5"><a href="#cb3-5"></a> <span class="op">$</span><span class="st"> </span>common_name<span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Pugnose Shiner&quot;</span> <span class="st">&quot;Brindled Madtom&quot;</span> <span class="st">&quot;Pumpkinseed&quot;</span> <span class="st">&quot;Silver Lamprey&quot;</span> ...</span>
+<span id="cb3-6"><a href="#cb3-6"></a> <span class="op">$</span><span class="st"> </span>date       <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;5/26/1900&quot;</span> <span class="st">&quot;9/26/1901&quot;</span> <span class="st">&quot;9/26/1901&quot;</span> <span class="st">&quot;5/14/1902&quot;</span> ...</span>
+<span id="cb3-7"><a href="#cb3-7"></a> <span class="op">$</span><span class="st"> </span>x          <span class="op">:</span><span class="st"> </span>num  <span class="fl">-76.5</span> <span class="fl">-79.4</span> <span class="fl">-79.4</span> <span class="fl">-77.7</span> <span class="fl">-73.9</span> ...</span>
+<span id="cb3-8"><a href="#cb3-8"></a> <span class="op">$</span><span class="st"> </span>y          <span class="op">:</span><span class="st"> </span>num  <span class="fl">42.5</span> <span class="fl">42.2</span> <span class="fl">42.2</span> <span class="fl">43.3</span> <span class="fl">40.9</span> ...</span></code></pre></div>
+<p>Now that we have an idea of what the data set looks like, let’s take a little closer look. First, there are a couple of things that we can do that will clean up our code down the road a little bit. Let’s have a quick look at our column names again.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">names</span>(atlas)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>[<span class="dv">1</span>] <span class="st">&quot;species&quot;</span>     <span class="st">&quot;common_name&quot;</span> <span class="st">&quot;date&quot;</span>        <span class="st">&quot;x&quot;</span>           <span class="st">&quot;y&quot;</span>          </span></code></pre></div>
+</div>
+<div id="data-manipulation" class="section level2">
+<h2><strong>Data manipulation</strong></h2>
+<p>Now that we have had a quick look at our data, and we have made some changes for the sake of convenience, let’s dig a little deeper.</p>
+<p>We are going to make a column for <code>year</code> to get started so we can plot out our data by that variable eventually. But first, we need to convert our dates into a more standard <code>Date</code> object that R can use. Note that this single line of code has probably frustrated more people than the entire remainder of the R language combined. Keep it somewhere you can find it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>atlas &lt;-<span class="st"> </span>atlas <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(<span class="kw">as.character</span>(date), <span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>))</span></code></pre></div>
+<p>Next, we will make a column for <code>year</code> in our data set using the <code>year()</code> function from the <code>lubridate</code> package:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>atlas<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(atlas<span class="op">$</span>date)</span></code></pre></div>
+<p>As long as we are at it, we will also add a new column to the data for <code>site</code>. I am using a little bit of a hacky trick here to just assign <code>site</code> based on longitude and latitude just for demonstration.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>atlas<span class="op">$</span>site =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(<span class="kw">paste</span>(atlas<span class="op">$</span>x, atlas<span class="op">$</span>y)))</span></code></pre></div>
+<p>Now, let’s go ahead and grab a single species.</p>
+<p>If you want to see a list of species you can choose from, remember you can sort the unique values of <code>atlas$species</code> and scroll through them if you like and pick a fave. If you can’t identify your favorite fish using it’s Latin binomial, shame on you.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Like this</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>species_in_atlas &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(atlas<span class="op">$</span>species))</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># You could also print() this</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">head</span>(species_in_atlas)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>[<span class="dv">1</span>] <span class="st">&quot;Acantharchus pomotis&quot;</span>   <span class="st">&quot;Acipenser brevirostrum&quot;</span> <span class="st">&quot;Acipenser fulvescens&quot;</span>  </span>
+<span id="cb8-7"><a href="#cb8-7"></a>[<span class="dv">4</span>] <span class="st">&quot;Acipenser oxyrinchus&quot;</span>   <span class="st">&quot;Alosa aestivalis&quot;</span>       <span class="st">&quot;Alosa mediocris&quot;</span>       </span></code></pre></div>
+<p>I am going to work with blueback herring (<code>Alosa aestivalis</code>) for this one because it is one I have been writing a lot of code for lately.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>selection &lt;-<span class="st"> </span>atlas <span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">filter</span>(species <span class="op">==</span><span class="st"> &quot;Alosa aestivalis&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">group_by</span>(species, year, site, x, y) <span class="op">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_records =</span> <span class="kw">n</span>(), <span class="dt">.groups =</span> <span class="st">&quot;keep&quot;</span>)</span></code></pre></div>
+<p>Finally, let’s get rid of the points with missing coordinates. We aren’t going to be able to use these for any kind of spatial analysis anyway.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Remove points with missing or </span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># cray longitude (x) and latitude (y)</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>fish_data &lt;-<span class="st"> </span>selection <span class="op">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(y) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(y) <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">&gt;=</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;=</span><span class="st"> </span><span class="dv">60</span>) )</span></code></pre></div>
+</div>
+<div id="spatial-data" class="section level2">
+<h2><strong>Spatial data</strong></h2>
+<p>Next, we will convert our points from the <code>atlas</code> data into a projected coordinate system that will allow us to overlay the data points onto the outline of the state and do some QC. This will take a few steps.</p>
+<p>First, read in the shape file. I am going to use a function called <code>readOGR()</code> for this because it is a format that will work well with functions from the <code>sp()</code> package to transform the coordinate systems, but there are lots of options and those may save you a step or two here.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">library</span>(rgdal)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>NY &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">&quot;data/NYS/State_Shoreline.shp&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>Now, we will assign coordinates to our <code>atlas</code> dataframe “officially” using the <code>coordinates()</code> function from the <code>sp</code> package. This will automatically convert our <code>data.frame</code> to a <code>SpatialPoints</code>-class object that R recognizes as a geo-spatial data type.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Load sp package</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">library</span>(sp)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Make a copy that we will use for coordinate transformation</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>temp_data &lt;-<span class="st"> </span>fish_data</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Assign longitude and latitude to a</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co"># SpatialPoints-class obj. This converts df to</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co"># a spatial dataframe</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="kw">coordinates</span>(temp_data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)</span></code></pre></div>
+<p>We will tell R that the coordinates in our <code>fish_data</code> are currently stored as longitudes (<code>x</code>) and latitudes (<code>y</code>) stored in a <code>WGS84</code> datum (usually the default).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">proj4string</span>(temp_data) &lt;-<span class="st"> </span><span class="kw">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>)</span></code></pre></div>
+<p>We can transform the longitude and latitude coordinates into a projected universal transverse mercator (UTM) system pretty easily, too. Here, the string that I pass to CRS came from the output of <code>project4string(NY)</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Get the CRS for the NY shapefile so we can match them</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>ny_crs &lt;-<span class="st"> </span><span class="kw">proj4string</span>(NY)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Get UTMs for the longitudes and latitudes using</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co"># the coordinate system of our shape file</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>coord_utm &lt;-<span class="st"> </span><span class="kw">spTransform</span>(temp_data, <span class="kw">CRS</span>(ny_crs))</span></code></pre></div>
+<p>Assign the UTMs to variables in our data set that we set aside above, and then use the <code>coordinates()</code> function we used above.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Assign the coordinates to new columns</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># in our dataframe</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>fish_data<span class="op">$</span>x &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[, <span class="dv">1</span>]</span>
+<span id="cb15-4"><a href="#cb15-4"></a>fish_data<span class="op">$</span>y &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[, <span class="dv">2</span>]</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">coordinates</span>(fish_data) &lt;-<span class="st"> </span><span class="er">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">proj4string</span>(fish_data) &lt;-<span class="st"> </span><span class="kw">CRS</span>(ny_crs)</span></code></pre></div>
+<p>We can plot these quickly to get an idea of the spread we are working with:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># We&#39;ll use the ggplot2 library for our plots</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># and we&#39;ll need a couple of handy functions </span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># from the sf package, too.</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">library</span>(sf)</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Make the plot</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> <span class="kw">st_as_sf</span>(NY), <span class="dt">fill =</span> <span class="st">&quot;gray97&quot;</span>) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="st">  </span><span class="kw">geom_point</span>(</span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="dt">data =</span> <span class="kw">data.frame</span>(fish_data),</span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> <span class="st">&quot;tomato4&quot;</span>,),</span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="dt">alpha =</span> <span class="fl">0.8</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">show_guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="kw">unique</span>(fish_data<span class="op">$</span>species), <span class="st">&quot; distribution&quot;</span>)) <span class="op">+</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb16-18"><a href="#cb16-18"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
+<span id="cb16-19"><a href="#cb16-19"></a>    <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb16-20"><a href="#cb16-20"></a>  )</span></code></pre></div>
+<p><img src="_intermediate_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>This is a pretty good starting point.</p>
+<p>Depending on the species you chose to work with, you may have a few data points in Vermont or maybe even New Hampshire in your data set. These types of errors are really common, so it is important to check your data, even if you are the one who entered it.</p>
+<p>Luckily, we can take care of this pretty easily using the spatial tools we’ve been working with:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Perform a spatial intersect between</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co"># the NY shapefile (polygon) and</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># the SpatialPoints object.</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Note that order is important here.</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>ins &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">over</span>(fish_data, NY)</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Then, we can drop the points that</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># do not not intersect with the polygon,</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="co"># now saving over the original data set.</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>dd &lt;-<span class="st"> </span>fish_data[<span class="op">!</span><span class="kw">is.na</span>(ins[, <span class="dv">1</span>]), ]</span></code></pre></div>
+<p>You can plot the polygon and the points again on your own if you’d like just to double check, replacing <code>fish_data</code> with <code>atlas_sp</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Make the plot</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> <span class="kw">st_as_sf</span>(NY), <span class="dt">fill =</span> <span class="st">&quot;gray97&quot;</span>) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="st">  </span><span class="kw">geom_point</span>(</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> <span class="st">&quot;tomato4&quot;</span>,),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="dt">alpha =</span> <span class="fl">0.8</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">show_guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="kw">unique</span>(dd<span class="op">$</span>species), <span class="st">&quot; distribution&quot;</span>)) <span class="op">+</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
+<span id="cb18-13"><a href="#cb18-13"></a>    <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb18-14"><a href="#cb18-14"></a>  )</span></code></pre></div>
+<p><img src="_intermediate_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
