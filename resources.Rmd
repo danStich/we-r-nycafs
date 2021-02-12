@@ -10,9 +10,9 @@ At every workshop or during every semester, folks ask about about additional res
 
 Here are a few of our favorites:
 
-<a href="https://www.amazon.com/Introductory-Fisheries-Analyses-Chapman-Hall/dp/148223520X">**Introductory Fisheries Analyses With R**</a>. This is a must-have for any fisheries professional who is interested in getting started in R and wants to focus on fisheries applications. It covers multiple methods for doing common a variety of fisheries analyses using the `FSA` package in R, and even includes applied examples of more general statistics such as ANOVA and regression. Easy to follow along and fun to play with. Buy it, seriously. 
+<a href="https://www.amazon.com/Introductory-Fisheries-Analyses-Chapman-Hall/dp/148223520X">**Introductory Fisheries Analyses With R**</a>. This is a must-have for any fisheries professional who is interested in getting started in R and wants to focus on fisheries applications. It covers multiple methods for doing a variety of fisheries-specific analyses using the `FSA` package in R, and even includes applied examples of more general analyses. Easy to follow along and fun to play with. Buy it, seriously. 
 
-<a href="https://rstudio.com/resources/cheatsheets/">**The cheat sheets**</a> The RStudio cheatsheets page is something nobody should ever have to live without. There are literally dozens of these things, and they are super useful. I have gone through periods of learning R when these adorned every nook and cranny of my office. A one-stop shop with something for everyone.
+<a href="https://rstudio.com/resources/cheatsheets/">**The cheat sheets**</a> The RStudio cheat sheets page is something nobody should ever have to live without. There are literally dozens of these things, and they are super useful. I have gone through periods of learning R when these adorned every nook and cranny of my office. A one-stop shop with something for everyone.
 
 <a href="https://swirlstats.com/students.html">**Swirl**</a> is an R package that was written to help people learn R. What a novel idea, eh? There are a bunch of really handy course modules that you can install through R from the <a href="https://github.com/swirldev/swirl_courses#swirl-courses">Swirl GitHub repo</a>.
 
