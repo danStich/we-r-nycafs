@@ -63,7 +63,7 @@ ggplot(grasscarp, aes(x = tl)) + geom_histogram(binwidth = 10)
 
 Wow, that is way easier than it used to be even in R. Thanks `ggplot()`!
 
-Okay, so this plot is better, but there is still a lot of ugly crap going on here. For one, the labels make no sense. The axes don't cross at zero, we have no color, and we have an ugly main heading in our figure that we will virtually never use for papers or reports.
+Okay, so this plot is better, but there is still a lot of ugly crap going on here. For one, the labels don't work for me. The axes don't cross at zero, and we have no color.
 
 So, let's fix it!!
 

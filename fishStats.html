@@ -466,7 +466,7 @@ Doing it ‘by hand’
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">ggplot</span>(grasscarp, <span class="kw">aes</span>(<span class="dt">x =</span> tl)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p><img src="fishStats_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Wow, that is way easier than it used to be even in R. Thanks <code>ggplot()</code>!</p>
-<p>Okay, so this plot is better, but there is still a lot of ugly crap going on here. For one, the labels make no sense. The axes don’t cross at zero, we have no color, and we have an ugly main heading in our figure that we will virtually never use for papers or reports.</p>
+<p>Okay, so this plot is better, but there is still a lot of ugly crap going on here. For one, the labels don’t work for me. The axes don’t cross at zero, and we have no color.</p>
 <p>So, let’s fix it!!</p>
 <p>First, let’s make a better looking histogram “by hand”.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Make a histogram with 10-mm size bins</span></span>
