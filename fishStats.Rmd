@@ -100,7 +100,7 @@ If we want a faster solution, there are a number of **packages** that are mainta
 library(FSA)
 ```
  
-The `FSA` package contains a lot of really cool tools that make life a lot easier. And, you can even get an introductory fisheries statistics book, [fishR](http://derekogle.com/IFAR/), that goes along with it. We will cover some basic applications here, but realize that this package can be used for a whole lot of other stuff, and now includes much of what previously was housed in many different places.
+The `FSA` package contains a lot of really cool tools that make life a lot easier. And, you can even get an introductory fisheries statistics book [(Ogle 2016)](http://derekogle.com/IFAR/) that goes along with it. We will cover some basic applications here, but realize that this package can be used for a whole lot of other stuff, and now includes much of what previously was housed in many different places.
 
 For example, if we wanted to create a length-frequency histogram that shows some of the Gabelhouse length categories, we could do it like this:
 ```{r}
