@@ -11,7 +11,7 @@ Here is a link to the [code we wrote during the live session Feb 12 2021](https:
 
 <a href="./fishStats.html"><b>Introduction to fisheries statistics in R</b></a>: an introduction to methods and tools available for common fisheries analyses in R, including length-frequency histograms, proportional size distribution (PSD), growth curves, and length-weight regression. Methods are demonstrated using base R functionality in addition to functions available through the `FSA` package for R (<a href="https://github.com/droglenc/FSA">Ogle et al. 2020</a>). 
 
-Here is a link to the [code we wrote during the live session Feb 12 2021](https://github.com/danStich/we-r-nycafs/blob/main/workshop_files/fishStats_live.R).
+Here is a link to the [code we wrote during the live session Feb 19 2021](https://github.com/danStich/we-r-nycafs/blob/main/workshop_files/fishStats_live.R).
 
 
 <a href="./intro_gis.html"><b>Introduction to spatial data for fisheries in R</b></a>: a (really basic) introduction to working with and plotting data commonly used in geographic information systems (GIS).
